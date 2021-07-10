@@ -1,0 +1,205 @@
+package interface_grafica;
+
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.MouseInfo;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.SwingUtilities;
+import javax.swing.JLayeredPane;
+import javax.swing.border.LineBorder;
+
+
+public class InterfaceMiniGolf extends JFrame {
+
+	private JPanel contentPane;
+	private JLabel lblBola;
+	private TestPane panel;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					InterfaceMiniGolf frame = new InterfaceMiniGolf();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public InterfaceMiniGolf() {
+		  
+
+		setTitle("Minigolf");
+		setBackground(new Color(0, 102, 51));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 805, 599);
+		
+		DrawMenuBar();
+		
+		contentPane = new JPanel();
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Jogador da Vez");
+		lblNewLabel.setBounds(5, 11, 221, 31);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblStatus = new JLabel("Status");
+		lblStatus.setBounds(0, 514, 779, 24);
+		lblStatus.setVerticalAlignment(SwingConstants.BOTTOM);
+		contentPane.add(lblStatus);
+		
+		
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		
+		panel = new TestPane("/images/grass.jpg");
+		panel.setForeground(new Color(0, 51, 0));
+		panel.setBorder(new LineBorder(new Color(0, 0, 0), 0));
+		panel.setBounds(0, 43, 779, 469);
+		panel.setBackground(new Color(0, 128, 0));
+		contentPane.add(panel);
+		
+		JLabel lblJogadorDaVez = new JLabel("Rodada N");
+		lblJogadorDaVez.setVerticalAlignment(SwingConstants.TOP);
+		lblJogadorDaVez.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblJogadorDaVez.setBounds(664, 11, 115, 31);
+		contentPane.add(lblJogadorDaVez);
+		
+		DrawBola();
+		
+		DrawPontilhado();
+		
+		DrawBuraco();
+		
+		
+		
+	}
+
+	protected void DrawBuraco() {
+		JLabel lblBuraco = new JLabel("");
+		lblBuraco.setBounds(158, 185, 30, 30);
+		lblBuraco.setIcon(new ImageIcon(InterfaceMiniGolf.class.getResource("/images/buraco.png")));
+		panel.add(lblBuraco);
+		
+		JLabel lblPontJog1 = new JLabel("Jogador1: ");
+		lblPontJog1.setBounds(0, 26, 213, 20);
+		panel.add(lblPontJog1);
+		lblPontJog1.setFont(new Font("Tahoma", Font.BOLD, 12));
+		
+		JLabel lblpontuacao = new JLabel("Pontua\u00E7\u00E3o: ");
+		lblpontuacao.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblpontuacao.setBounds(0, 0, 213, 30);
+		panel.add(lblpontuacao);
+		
+		JLabel lblPontJog2 = new JLabel("Jogador2: ");
+		lblPontJog2.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblPontJog2.setBounds(0, 45, 213, 20);
+		panel.add(lblPontJog2);
+		
+		TestPane panel_1 = new TestPane("/images/wood.png");
+		panel_1.setBounds(111, 96, 9, 243);
+		panel.add(panel_1);
+		
+		TestPane panel_1_1 = new TestPane("/images/wood.png");
+		panel_1_1.setBounds(607, 96, 9, 243);
+		panel.add(panel_1_1);
+		
+		TestPane panel_1_2 = new TestPane("/images/wood.png");
+		panel_1_2.setBounds(111, 88, 505, 9);
+		panel.add(panel_1_2);
+		
+		TestPane panel_1_2_1 = new TestPane("/images/wood.png");
+		panel_1_2_1.setBounds(111, 330, 505, 9);
+		panel.add(panel_1_2_1);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(InterfaceMiniGolf.class.getResource("/images/bandeira.png")));
+		lblNewLabel_1.setBounds(168, 129, 58, 96);
+		panel.add(lblNewLabel_1);
+	}
+	
+	protected void DrawBola() {
+		panel.setLayout(null);
+		lblBola = new JLabel("");
+		lblBola.setBounds(277, 287, 20, 20);
+		lblBola.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lblBola.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBola.setIcon(new ImageIcon(InterfaceMiniGolf.class.getResource("/Images/golfball.png")));
+		panel.add(lblBola);
+		
+		panel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Point p = MouseInfo.getPointerInfo().getLocation();
+				SwingUtilities.convertPointFromScreen(p, panel);
+				p.setLocation(p.getX() - lblBola.getWidth()/2, p.getY() - lblBola.getHeight()/2);
+				lblBola.setLocation(p);
+			}
+		});
+	}
+	
+	protected void DrawMenuBar() {
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnMenu = new JMenu("Menu");
+		menuBar.add(mnMenu);
+		
+		JMenuItem mntmConectar = new JMenuItem("Conectar");
+		mnMenu.add(mntmConectar);
+		
+		JMenuItem mntmDesconetar = new JMenuItem("Desconectar");
+		mnMenu.add(mntmDesconetar);
+		
+
+		
+		JMenuItem mntmIniciarPartida = new JMenuItem("Iniciar Partida");
+		mnMenu.add(mntmIniciarPartida);
+	}
+	
+	protected void DrawPontilhado() {
+		JLabel lblPontilhado = new JLabel("_ _ _ _ _ _ _ _ _");
+		lblPontilhado.setBounds(225, 185, 202, 30);
+		lblPontilhado.setForeground(Color.WHITE);
+		lblPontilhado.setFont(new Font("Tahoma", Font.BOLD, 24));
+		panel.add(lblPontilhado);
+		
+		panel.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				Point p = MouseInfo.getPointerInfo().getLocation();
+				SwingUtilities.convertPointFromScreen(p, panel);
+				
+				lblPontilhado.setLocation(p);
+			}
+		});
+	}
+}
+
