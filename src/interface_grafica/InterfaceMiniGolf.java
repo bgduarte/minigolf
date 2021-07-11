@@ -1,16 +1,14 @@
 package interface_grafica;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.awt.MouseInfo;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -19,18 +17,24 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
 import javax.swing.SwingUtilities;
-import javax.swing.JLayeredPane;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 
 public class InterfaceMiniGolf extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel lblBola;
-	private TestPane panel;
+	private TileMapPane panel;
+	private JLabel lblStatus;
 
 	/**
 	 * Launch the application.
@@ -70,7 +74,7 @@ public class InterfaceMiniGolf extends JFrame {
 		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblStatus = new JLabel("Status");
+		lblStatus = new JLabel("Status");
 		lblStatus.setBounds(0, 514, 779, 24);
 		lblStatus.setVerticalAlignment(SwingConstants.BOTTOM);
 		contentPane.add(lblStatus);
@@ -79,7 +83,7 @@ public class InterfaceMiniGolf extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		panel = new TestPane("/images/grass.jpg");
+		panel = new TileMapPane("/images/grass.jpg");
 		panel.setForeground(new Color(0, 51, 0));
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 0));
 		panel.setBounds(0, 43, 779, 469);
@@ -91,6 +95,22 @@ public class InterfaceMiniGolf extends JFrame {
 		lblJogadorDaVez.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblJogadorDaVez.setBounds(664, 11, 115, 31);
 		contentPane.add(lblJogadorDaVez);
+		
+		JProgressBar progressBar = new JProgressBar();
+		progressBar.setBounds(206, 11, 369, 25);
+		contentPane.add(progressBar);
+		UIManager.put("ProgressBar.selectionBackground", Color.RED);
+		
+		
+		panel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Point p = MouseInfo.getPointerInfo().getLocation();
+				progressBar.setValue((int)p.getX()%100);
+			}
+		});
+		
+	
 		
 		DrawBola();
 		
@@ -123,19 +143,19 @@ public class InterfaceMiniGolf extends JFrame {
 		lblPontJog2.setBounds(0, 45, 213, 20);
 		panel.add(lblPontJog2);
 		
-		TestPane panel_1 = new TestPane("/images/wood.png");
+		TileMapPane panel_1 = new TileMapPane("/images/wood.png");
 		panel_1.setBounds(111, 96, 9, 243);
 		panel.add(panel_1);
 		
-		TestPane panel_1_1 = new TestPane("/images/wood.png");
+		TileMapPane panel_1_1 = new TileMapPane("/images/wood.png");
 		panel_1_1.setBounds(607, 96, 9, 243);
 		panel.add(panel_1_1);
 		
-		TestPane panel_1_2 = new TestPane("/images/wood.png");
+		TileMapPane panel_1_2 = new TileMapPane("/images/wood.png");
 		panel_1_2.setBounds(111, 88, 505, 9);
 		panel.add(panel_1_2);
 		
-		TestPane panel_1_2_1 = new TestPane("/images/wood.png");
+		TileMapPane panel_1_2_1 = new TileMapPane("/images/wood.png");
 		panel_1_2_1.setBounds(111, 330, 505, 9);
 		panel.add(panel_1_2_1);
 		
@@ -173,14 +193,32 @@ public class InterfaceMiniGolf extends JFrame {
 		menuBar.add(mnMenu);
 		
 		JMenuItem mntmConectar = new JMenuItem("Conectar");
+		mntmConectar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed (MouseEvent e) {
+				lblStatus.setText("Conectado");
+			}
+		});
 		mnMenu.add(mntmConectar);
 		
 		JMenuItem mntmDesconetar = new JMenuItem("Desconectar");
+		mntmDesconetar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed (MouseEvent e) {
+				lblStatus.setText("Desconectado");
+			}
+		});
 		mnMenu.add(mntmDesconetar);
 		
 
 		
 		JMenuItem mntmIniciarPartida = new JMenuItem("Iniciar Partida");
+		mntmIniciarPartida.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed (MouseEvent e) {
+				lblStatus.setText("Iniciado a partida");
+			}
+		});
 		mnMenu.add(mntmIniciarPartida);
 	}
 	

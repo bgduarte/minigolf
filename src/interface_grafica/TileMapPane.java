@@ -9,7 +9,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class TestPane extends JPanel {
+public class TileMapPane extends JPanel {
 
 	/**
 	 * 
@@ -17,7 +17,7 @@ public class TestPane extends JPanel {
 	private static final long serialVersionUID = -122088383791575745L;
 	private BufferedImage tile;
 
-	public TestPane(String path) {
+	public TileMapPane(String path) {
 		try {
 			tile = ImageIO.read(getClass().getResource(path));
 		} catch (IOException ex) {
