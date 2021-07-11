@@ -15,7 +15,7 @@ public class TileMapPane extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = -122088383791575745L;
-	private BufferedImage tile;
+	protected BufferedImage tile;
 
 	public TileMapPane(String path) {
 		try {

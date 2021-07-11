@@ -31,10 +31,10 @@ public class InterfaceMiniGolf extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JLabel lblBola;
-	private TileMapPane panel;
-	private JLabel lblStatus;
+	protected JPanel contentPane;
+	protected JLabel lblBola;
+	protected TileMapPane panel;
+	protected JLabel lblStatus;
 
 	/**
 	 * Launch the application.
@@ -171,7 +171,7 @@ public class InterfaceMiniGolf extends JFrame {
 		lblBola.setBounds(277, 287, 20, 20);
 		lblBola.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lblBola.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBola.setIcon(new ImageIcon(InterfaceMiniGolf.class.getResource("/Images/golfball.png")));
+		lblBola.setIcon(new ImageIcon(InterfaceMiniGolf.class.getResource("/images/golfball.png")));
 		panel.add(lblBola);
 		
 		panel.addMouseListener(new MouseAdapter() {
