@@ -9,21 +9,21 @@ import br.ufsc.inf.leobr.cliente.exception.ArquivoMultiplayerException;
 import br.ufsc.inf.leobr.cliente.exception.JahConectadoException;
 import br.ufsc.inf.leobr.cliente.exception.NaoConectadoException;
 import br.ufsc.inf.leobr.cliente.exception.NaoPossivelConectarException;
-import interface_grafica.AtorJogador;
+import interface_grafica.InterfaceJogador;
 
-public class AtorNetgames implements OuvidorProxy {
+public class InterfaceNetgamesServer implements OuvidorProxy {
 	private static final long serialVersionUID = 1L;
 	protected Proxy proxy;
-	protected AtorJogador atorJogador;
+	protected InterfaceJogador atorJogador;
 	protected boolean conectado = false;
 
-	public AtorNetgames() {
+	public InterfaceNetgamesServer() {
 		super();
 		this.proxy = Proxy.getInstance();
 		proxy.addOuvinte(this);
 	}
 
-	public void definirInterfaceJogador(AtorJogador ator) {
+	public void definirInterfaceJogador(InterfaceJogador ator) {
 		atorJogador = ator;
 	}
 

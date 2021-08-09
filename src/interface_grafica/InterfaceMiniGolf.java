@@ -38,7 +38,7 @@ public class InterfaceMiniGolf extends JFrame {
 	protected JLabel lblBola;
 	protected TileMapPane panel;
 	protected JLabel lblStatus;
-	private AtorJogador atorJogador;
+	private InterfaceJogador atorJogador;
 
 	/**
 	 * Launch the application.
@@ -60,7 +60,7 @@ public class InterfaceMiniGolf extends JFrame {
 	 * Create the frame.
 	 */
 	public InterfaceMiniGolf() {
-		atorJogador = new AtorJogador();
+		atorJogador = new InterfaceJogador();
 
 		setTitle("Minigolf");
 		setBackground(new Color(0, 102, 51));
