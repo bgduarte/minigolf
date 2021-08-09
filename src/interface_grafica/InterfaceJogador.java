@@ -3,13 +3,13 @@ package interface_grafica;
 import dominio_do_problema.*;
 import rede.*;
 
-public class AtorJogador {
+public class InterfaceJogador {
 	
-	protected AtorNetgames ngServer;
+	protected InterfaceNetgamesServer ngames;
 	protected ElementoDominioProblema domProblema;
 
-	public AtorJogador() {
-		ngServer = new AtorNetgames();
+	public InterfaceJogador() {
+		ngames = new InterfaceNetgamesServer();
 		domProblema = new ElementoDominioProblema();
 	}
 
@@ -17,7 +17,7 @@ public class AtorJogador {
 		String mensagem = "ja conectado";
 		boolean permitido = domProblema.permitidoConectar();
 		if (permitido) {
-			mensagem = ngServer.conectar(string, string2);
+			mensagem = ngames.conectar(string, string2);
 			if (mensagem.equals("Sucesso: conectado a Netgames Server")) {
 				domProblema.definirConectado(true);
 			}
@@ -29,7 +29,7 @@ public class AtorJogador {
 		String mensagem = "Nao conectado para poder desconectar";
 		boolean permitido = domProblema.permitidoDesconectar();
 		if (permitido) {
-			mensagem = ngServer.desconectar();
+			mensagem = ngames.desconectar();
 			if (mensagem.equals("Sucesso: desconectado de Netgames Server")) {
 				domProblema.definirConectado(false);
 			}
@@ -41,7 +41,7 @@ public class AtorJogador {
 		String mensagem = "Faltam jogadores suficientes conectados";
 		boolean permitido = domProblema.permitidoIniciarPartida();
 		if (permitido) {
-			mensagem = ngServer.iniciarPartida();
+			mensagem = ngames.iniciarPartida();
 		}
 		return mensagem;
 	}
