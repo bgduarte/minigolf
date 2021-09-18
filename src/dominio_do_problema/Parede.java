@@ -3,16 +3,17 @@ package dominio_do_problema;
 public class Parede {
 	
 	protected Vetor2[] posicoes;
-	protected float espessura;
 
 	//Construtores
 	public Parede() {
 
 	} 
 
-	public Parede(Vetor2[] posicoes, float espessura) {
-		this.posicoes = posicoes;
-		this.espessura =espessura;
+	public Parede(float[] parDeCoordenada) {
+		posicoes = new Vetor2[2];
+		posicoes[0] = new Vetor2(parDeCoordenada[0], parDeCoordenada[1]);
+		posicoes[1] = new Vetor2(parDeCoordenada[2], parDeCoordenada[3]);
+		
 	}
 	
 	//Outros metodos

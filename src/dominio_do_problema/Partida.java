@@ -9,8 +9,9 @@ public class Partida {
 	Partida(boolean jogadorLocalIniciou) {
 		//TODO: ler mapa de um arquivo
 		// Inicializaçao do mapa
-		Parede[] paredes;
-		paredes[0] = new Parede(new Vetor2(50, 50), new Vetor2(70, 50));
+		Parede[] paredes = new Parede[1];
+		float[] parDeCoordenadas = {50f, 50f, 50f, 60f};
+		paredes[0] = new Parede(parDeCoordenadas);
 	
 		Vetor2 posicaoBuraco = new Vetor2(100, 100);
 		Vetor2 posicaoInicio = new Vetor2(200, 200);
