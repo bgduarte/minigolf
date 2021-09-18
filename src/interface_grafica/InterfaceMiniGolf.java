@@ -28,6 +28,10 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import dominio_do_problema.EstadoDeJogador;
+import dominio_do_problema.EstadoPartida;
+import dominio_do_problema.Vetor2;
+
 public class InterfaceMiniGolf extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -272,5 +276,68 @@ public class InterfaceMiniGolf extends JFrame {
 			String mensagem = atorJogador.iniciarPartida();
 			JOptionPane.showMessageDialog(null, mensagem);
 		}
+	}
+
+	public void exibirEstado(EstadoPartida estado) {
+		String mensagem = estado.obterMensagem();
+		if (mensagem != null) {
+			exibirMensagem(mensagem);
+		}
+		
+		boolean ehJogadorLocal = estado.obterTurnoJogadorLocal();
+		exibirJogadorDaVez(ehJogadorLocal);
+		
+		EstadoDeJogador jogadorLocal = estado.obterEstadoDeJogador(true);
+		EstadoDeJogador jogadorRemoto = estado.obterEstadoDeJogador(false);
+		
+		int tacadasLocal = jogadorLocal.obterTacadas();
+		int tacadasRemoto = jogadorRemoto.obterTacadas();		
+		exibirTacadas(tacadasLocal, true);
+		exibirTacadas(tacadasRemoto, false);
+		Vetor2 posicaoBolaLocal = jogadorLocal.obterPosicaoBola();
+		Vetor2 posicaoBolaRemoto = jogadorRemoto.obterPosicaoBola();
+		exibirBola(posicaoBolaLocal, true);
+		exibirBola(posicaoBolaRemoto, false);	
+	}
+	
+	public void desenharForca(float fracao) {
+	}
+	
+	public void selecionarForca() {
+	}
+	
+	public void selecionarDirecao(Vetor2 direcao) {
+	}
+	
+	public void conectar() {
+	}
+	
+	public String obterNomeJogador(){
+		return "";
+	}
+	
+	public String obterEnderecoServidor() {
+		return "";
+	}
+	
+	public void notificar(String notificacao) {
+	}
+	
+	public void iniciarPartida() {
+	}
+	
+	public void exibirEstado() {
+	}
+	
+	public void exibirMensagem(String mensagem) {
+	}
+	
+	public void exibirJogadorDaVez(boolean ehJogadorLocal) {
+	}
+	
+	public void exibirTacadas(int tacadas, boolean ehJogadorLocal) {
+	}
+	
+	public void exibirBola(Vetor2 posicao, boolean ehJogadorLocal) {
 	}
 }
