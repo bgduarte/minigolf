@@ -1,10 +1,10 @@
 package dominio_do_problema;
 
-public class Terreno {
+public abstract class Terreno {
 
 	protected float atrito;
 	
 	public float obterAtrito() {
-		return 0;
+		return atrito;
 	}
 }

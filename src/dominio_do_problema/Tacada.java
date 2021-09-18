@@ -4,7 +4,12 @@ public class Tacada {
 
 	protected Vetor2 velocidade;
 	
+	public Tacada(Vetor2 velocidade) {
+		this.velocidade = velocidade;
+	}
+	
 	public Vetor2 obterVelocidade() {
-		return new Vetor2();
+		return velocidade;
 	}
 }
+	

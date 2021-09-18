@@ -6,11 +6,19 @@ public class EstadoDeJogador {
 	protected Vetor2 posicaoBola;
 	protected boolean acertou;
 	
+	public EstadoDeJogador(int tacadas, Vetor2 posicaoBola, boolean acertou) {
+		this.tacadas = tacadas;
+		this.posicaoBola = posicaoBola;
+		this.acertou = acertou;
+	}
+	
 	public int obterTacadas() {
-		return 0;
+		return tacadas;
 	}
 	
 	public Vetor2 obterPosicaoBola() {
-		return new Vetor2();
+		return posicaoBola;
 	}
+	
+	//TODO : Obter tacadas?
 }

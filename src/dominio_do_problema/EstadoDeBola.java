@@ -6,25 +6,33 @@ public class EstadoDeBola {
 	protected Vetor2 posicao;
 	protected boolean noBuraco;
 	
+	public EstadoDeBola(Vetor2 velocidade, Vetor2 posicao) {
+		this.velocidade = velocidade;
+		this.posicao = posicao;
+		this.noBuraco = false;
+	}
+	
 	public Vetor2 obterVelocidade() {
-		return new Vetor2();
+		return velocidade;
 	}
 	
 	public Vetor2 obterPosicao() {
-		return new Vetor2();
+		return posicao;
 	}
 	
 	public boolean obterEmMovimento() {
-		return false;
+		return velocidade.obterMagnitude() > 0;
 	}
 	
 	public boolean obterNoBuraco() {
-		return false;
+		return noBuraco;
 	}
 	
 	public void definirVelocidade(Vetor2 novaVelocidade) {
+		velocidade = novaVelocidade;
 	}
 	
 	public void definirNoBuraco(boolean noBuraco) {
+		this.noBuraco = noBuraco;
 	}
 }

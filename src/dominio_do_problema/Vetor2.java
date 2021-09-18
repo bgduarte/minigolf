@@ -38,4 +38,8 @@ public class Vetor2 {
 		this.y = y;
 	}
 	
+	public float obterMagnitude() {
+		return (float)Math.sqrt(x*x + y*y);
+	}
+	
 }

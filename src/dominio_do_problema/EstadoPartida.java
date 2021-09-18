@@ -8,20 +8,28 @@ public class EstadoPartida {
 	protected EstadoDeJogador jogadorLocal;
 	protected int jogadorVencedor;
 	
+	//TODO: ta estranho
+	
 	public void definirEstado(EstadoDeJogador jogadorRemoto, EstadoDeJogador jogadorLocal, boolean turnoJogadorLocal) {
+		this.jogadorRemoto = jogadorRemoto;
+		this.jogadorLocal = jogadorLocal;
+		this.turnoJogadorLocal = turnoJogadorLocal;
 	}
 	
 	public boolean obterTurnoJogadorLocal() {
-		return false;
+		return turnoJogadorLocal;
 	}
 	
 	public void definirMensagem(String mensagem) {
+		this.mensagem = mensagem;
 	}
 	
 	public String obterMensagem() {
-		return "";
+		return mensagem;
 	}
 	
-	public void obterEstadoDeJogador() {
+	public EstadoDeJogador obterEstadoDeJogador(boolean doLocal) {
+		return doLocal ? jogadorLocal : jogadorRemoto;
+		
 	}
 }
