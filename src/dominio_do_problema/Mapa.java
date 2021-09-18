@@ -7,7 +7,7 @@ public class Mapa {
 	protected Buraco buraco;
 	protected Vetor2 posicaoDeInicio;
 	
-	public void efetuarMovimentacao(EstadoDeBola estadoBola, float tempoIteracao) {
+	public EstadoDeBola efetuarMovimentacao(EstadoDeBola estadoBola, float tempoIteracao) {
 	}
 	
 	public Terreno obterTerreno(Vetor2 posicao) {
