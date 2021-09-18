@@ -7,6 +7,10 @@ public class Mapa {
 	protected Buraco buraco;
 	protected Vetor2 posicaoDeInicio;
 	
+	public Vetor2 obterPosicaoDeInicio() {
+		return posicaoDeInicio;
+	}
+	
 	public void efetuarMovimentacao(EstadoDeBola estadoBola, float tempoIteracao) {
 	}
 	

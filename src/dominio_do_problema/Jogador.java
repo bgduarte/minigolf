@@ -2,42 +2,41 @@ package dominio_do_problema;
 
 public class Jogador {
 	
-	protected String nome;
 	protected Bola bola;
 	protected boolean acertou;
 	protected int jogadas;
 	
+	public Jogador(Vetor2 posInicial) {
+		bola = new Bola(posInicial);
+		acertou = false;
+		jogadas = 0;
+	}
+	
 	public void iteraBolinha(float tempoIteracao) {
+		bola.iteraBolinha(tempoIteracao);
 	}
 	
 	public void aplicarTacada(Vetor2 velocidade) {
+		bola.aplicarTacada(velocidade);
 	}
 	
 	public EstadoDeBola obterEstadoBola() {
-		return new EstadoDeBola();
+		return bola.obterEstadoBola();
 	}
 	
 	public EstadoDeJogador obterEstadoJogador() {
-		return new EstadoDeJogador();
+		return new EstadoDeJogador(jogadas, bola.obterPosicao(), acertou);
 	}
 	
 	public void definirAcerto(boolean acertou) {
+		this.acertou = acertou;
 	}
-	
-	public void iniciar() {
-	}
-	
-	public void definirNome(String adversario) {
-	}
-	
-	public void definirComoPrimeiro() {
-	}
-	
+
 	public boolean obterAcertou() {
-		return false;
+		return acertou;
 	}
 	
 	public int obterTacadas() {
-		return 0;
+		return jogadas;
 	}
 }
