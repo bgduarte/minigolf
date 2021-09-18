@@ -7,6 +7,7 @@ public class InterfaceJogador {
 	
 	protected InterfaceNetgamesServer ngames;
 	protected ElementoDominioProblema domProblema;
+	protected float tempoDoMouse;
 
 	public InterfaceJogador() {
 		ngames = new InterfaceNetgamesServer();
@@ -45,5 +46,22 @@ public class InterfaceJogador {
 		}
 		return mensagem;
 	}
-
+	
+	public void receberTacada(Tacada tacada) {
+	}
+	
+	public void processarForca() {
+	}
+	
+	public void comecarAContar() {
+	}
+	
+	public void contarTempo() {
+	}
+	
+	public void selecionarForca() {
+	}
+	
+	public void terminarDeContar() {
+	}
 }
