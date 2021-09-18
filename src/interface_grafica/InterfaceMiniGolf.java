@@ -291,11 +291,14 @@ public class InterfaceMiniGolf extends JFrame {
 		EstadoDeJogador jogadorRemoto = estado.obterEstadoDeJogador(false);
 		
 		int tacadasLocal = jogadorLocal.obterTacadas();
-		int tacadasRemoto = jogadorRemoto.obterTacadas();		
+		int tacadasRemoto = jogadorRemoto.obterTacadas();
+		
 		exibirTacadas(tacadasLocal, true);
 		exibirTacadas(tacadasRemoto, false);
+		
 		Vetor2 posicaoBolaLocal = jogadorLocal.obterPosicaoBola();
 		Vetor2 posicaoBolaRemoto = jogadorRemoto.obterPosicaoBola();
+		
 		exibirBola(posicaoBolaLocal, true);
 		exibirBola(posicaoBolaRemoto, false);	
 	}
@@ -307,6 +310,7 @@ public class InterfaceMiniGolf extends JFrame {
 	}
 	
 	public void selecionarDirecao(Vetor2 direcao) {
+		
 	}
 	
 	public void conectar() {
