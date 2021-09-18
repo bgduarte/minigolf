@@ -6,8 +6,8 @@ public class Jogador {
 	protected boolean acertou;
 	protected int jogadas;
 	
-	public Jogador(Vetor2 posInicial) {
-		bola = new Bola(posInicial);
+	public Jogador(Vetor2 posInicial, Mapa mapa) {
+		bola = new Bola(posInicial, mapa);
 		acertou = false;
 		jogadas = 0;
 	}

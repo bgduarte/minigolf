@@ -12,8 +12,8 @@ public class Partida {
 		mapa = new Mapa();
 		Vetor2 posicaoInicial = mapa.obterPosicaoDeInicio();
 		
-		jogadores[0] = new Jogador(posicaoInicial);
-		jogadores[1] = new Jogador(posicaoInicial);
+		jogadores[0] = new Jogador(posicaoInicial, mapa);
+		jogadores[1] = new Jogador(posicaoInicial, mapa);
 		turnoJogadorLocal = jogadorLocalIniciou;
 	}
 	
@@ -86,7 +86,7 @@ public class Partida {
 	
 	public void encerrarPartidaLocalmente() {
 		Vetor2 posicaoInicial = mapa.obterPosicaoDeInicio();
-		jogadores[0] = new Jogador(posicaoInicial);
-		jogadores[1] = new Jogador(posicaoInicial);
+		jogadores[0] = new Jogador(posicaoInicial, mapa);
+		jogadores[1] = new Jogador(posicaoInicial, mapa);
 	}
 }

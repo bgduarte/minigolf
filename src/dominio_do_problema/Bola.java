@@ -8,29 +8,16 @@ public class Bola {
 	protected boolean emMovimento; 
 	protected boolean noBuraco;
 
-	//construtores
-	public Bola(){
-		
-	}
-
-	public Bola(Vetor2 posicao, Vetor2 velocidade, Mapa mapa){
+	public Bola(Vetor2 posicao, Mapa mapa){
 		this.posicao = posicao;
-		this.velocidade = velocidade;
+		this.velocidade = new Vetor2(0,0);
 		this.mapa = mapa;
 		this.emMovimento = false;
 		this.noBuraco = false;
 	}
-	
-	public Bola(Vetor2 posicao, Vetor2 velocidade, Mapa mapa, boolean emMovimento, boolean noBuraco){
-		this.posicao = posicao;
-		this.velocidade = velocidade;
-		this.mapa = mapa;
-		this.emMovimento = emMovimento;
-		this.noBuraco = noBuraco;
-	}
 
 
-	//set
+	//definir
 	public void definirVelocidade(Vetor2 novaVelocidade) {
 		this.velocidade = novaVelocidade;
 	}
@@ -44,7 +31,7 @@ public class Bola {
 	}
 
 
-	//get
+	//obter
 	public EstadoDeBola obterEstadoBola() {
 		return new EstadoDeBola(this.velocidade, this.posicao);
 	}

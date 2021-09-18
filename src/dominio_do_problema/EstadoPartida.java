@@ -32,6 +32,5 @@ public class EstadoPartida {
 	
 	public EstadoDeJogador obterEstadoDeJogador(boolean doLocal) {
 		return doLocal ? jogadorLocal : jogadorRemoto;
-		
 	}
 }
