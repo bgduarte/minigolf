@@ -11,7 +11,7 @@ public class Mapa {
 		return posicaoDeInicio;
 	}
 	
-	public void efetuarMovimentacao(EstadoDeBola estadoBola, float tempoIteracao) {
+	public EstadoDeBola efetuarMovimentacao(EstadoDeBola estadoBola, float tempoIteracao) {
 	}
 	
 	public Terreno obterTerreno(Vetor2 posicao) {

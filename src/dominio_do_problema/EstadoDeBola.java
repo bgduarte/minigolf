@@ -11,6 +11,12 @@ public class EstadoDeBola {
 		this.posicao = posicao;
 		this.noBuraco = false;
 	}
+
+	public EstadoDeBola(Vetor2 velocidade, Vetor2 posicao, boolean noBuraco) {
+		this.velocidade = velocidade;
+		this.posicao = posicao;
+		this.noBuraco = noBuraco;
+	}
 	
 	public Vetor2 obterVelocidade() {
 		return velocidade;
