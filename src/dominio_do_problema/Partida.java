@@ -8,8 +8,18 @@ public class Partida {
 	
 	Partida(boolean jogadorLocalIniciou) {
 		//TODO: ler mapa de um arquivo
-		//Passar o valor inicial do mapa
-		mapa = new Mapa();
+		// Inicializaçao do mapa
+		Parede[] paredes;
+		paredes[0] = new Parede(new Vetor2(50, 50), new Vetor2(70, 50));
+	
+		Vetor2 posicaoBuraco = new Vetor2(100, 100);
+		Vetor2 posicaoInicio = new Vetor2(200, 200);
+		float raioBuraco = 10f;
+		Buraco buraco = new Buraco(0f,posicaoBuraco , raioBuraco);
+		mapa = new Mapa(paredes, buraco, posicaoInicio);
+		
+		
+		//
 		Vetor2 posicaoInicial = mapa.obterPosicaoDeInicio();
 		
 		jogadores[0] = new Jogador(posicaoInicial, mapa);
