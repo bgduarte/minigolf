@@ -6,9 +6,11 @@ public class EstadoPartida {
 	protected boolean turnoJogadorLocal;
 	protected EstadoDeJogador jogadorRemoto;
 	protected EstadoDeJogador jogadorLocal;
-	protected int jogadorVencedor;
 	
-	//TODO: ta estranho
+	EstadoPartida() {
+		mensagem = "";
+		
+	}
 	
 	public void definirEstado(EstadoDeJogador jogadorRemoto, EstadoDeJogador jogadorLocal, boolean turnoJogadorLocal) {
 		this.jogadorRemoto = jogadorRemoto;
@@ -30,6 +32,5 @@ public class EstadoPartida {
 	
 	public EstadoDeJogador obterEstadoDeJogador(boolean doLocal) {
 		return doLocal ? jogadorLocal : jogadorRemoto;
-		
 	}
 }
