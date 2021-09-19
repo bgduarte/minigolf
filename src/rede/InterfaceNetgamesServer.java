@@ -9,6 +9,7 @@ import br.ufsc.inf.leobr.cliente.exception.ArquivoMultiplayerException;
 import br.ufsc.inf.leobr.cliente.exception.JahConectadoException;
 import br.ufsc.inf.leobr.cliente.exception.NaoConectadoException;
 import br.ufsc.inf.leobr.cliente.exception.NaoPossivelConectarException;
+import dominio_do_problema.Tacada;
 import interface_grafica.InterfaceJogador;
 
 public class InterfaceNetgamesServer implements OuvidorProxy {
@@ -105,4 +106,19 @@ public class InterfaceNetgamesServer implements OuvidorProxy {
 
 	}
 
+	public void receberTacada(Tacada tacada) {
+	}
+	
+	public void enviarTacada(Tacada tacada) {
+	}
+	
+	public boolean informaConectado() {
+		return false;
+	}
+	
+	public void definirConectado(boolean valor) {
+	}
+	
+	public void encerrarPartida() {
+	}
 }
