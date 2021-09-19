@@ -118,8 +118,8 @@ public class InterfaceJogador {
 			inicioUltimaIteracao = System.currentTimeMillis();
 			EstadoPartida estadoPartida = partida.iteraBolinha(tempoIteracao);
 			interfaceMiniGolf.exibirEstado(estadoPartida);
-			fimUltimaIteracao = System.currentTimeMillis();
 			novoEstadoTurno = estadoPartida.obterTurnoJogadorLocal();
+			fimUltimaIteracao = System.currentTimeMillis();
 		}
 	}
 	
@@ -143,7 +143,7 @@ public class InterfaceJogador {
 				ngames.encerrarPartida();
 			}
 			
-			ngames.iniciarPartida();
+			partida.iniciarPartida(true);
 		}
 	}
 }

@@ -39,16 +39,18 @@ public class InterfaceMiniGolf extends JFrame {
 	private final Action action_1 = new SwingAction_1();
 	private final Action action_2 = new SwingAction_2();
 	protected JPanel contentPane;
-	protected JLabel lblBola;
+	protected JLabel lblBola1;
+	protected JLabel lblBola2;
 	protected TileMapPane panel;
 	protected JLabel lblStatus;
 	protected InterfaceJogador atorJogador;
 	protected JLabel lblBuraco;
 	protected JLabel lblNumeroDeRodadas;
 	protected JLabel lblJogadorDaVez;
+	protected JProgressBar progressBar;
 	
-	JLabel lblPontJog1;
-	JLabel lblPontJog2;
+	protected JLabel lblPontJog1;
+	protected JLabel lblPontJog2;
 
 	/**
 	 * Launch the application.
@@ -96,15 +98,40 @@ public class InterfaceMiniGolf extends JFrame {
 
 		DrawBackGround();
 		
-		DrawProgressBar();
+		exibirBarraDeProgresso();
 		
 		DrawPontuacao();
-		
-		DrawBola();
 
 		DrawPontilhado();
 
 		DrawMapElements();
+		
+		panel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+				int x=e.getX();
+			    int y=e.getY();
+				selecionarDirecao(new Vetor2((float)x, (float)y));
+			}
+		});
+		
+		panel.setLayout(null);
+		lblBola1 = new JLabel("");
+		lblBola1.setBounds(277, 287, 20, 20);
+		lblBola1.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lblBola1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBola1.setIcon(new ImageIcon(InterfaceMiniGolf.class.getResource("/images/golfball.png")));
+		panel.add(lblBola1);
+		
+		panel.setLayout(null);
+		lblBola2 = new JLabel("");
+		lblBola2.setBounds(277, 287, 20, 20);
+		lblBola2.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lblBola2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBola2.setIcon(new ImageIcon(InterfaceMiniGolf.class.getResource("/images/golfball.png")));
+		panel.add(lblBola2);
+
 
 	}
 	
@@ -147,19 +174,11 @@ public class InterfaceMiniGolf extends JFrame {
 		panel.add(lblPontJog2);
 	}
 	
-	void DrawProgressBar() {
-		JProgressBar progressBar = new JProgressBar();
+	void exibirBarraDeProgresso() {
+		progressBar = new JProgressBar();
 		progressBar.setBounds(206, 11, 369, 25);
 		contentPane.add(progressBar);
 		UIManager.put("ProgressBar.selectionBackground", Color.RED);
-		
-		panel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				Point p = MouseInfo.getPointerInfo().getLocation();
-				progressBar.setValue((int) p.getX() % 100);
-			}
-		});
 	}
 	
 	void DrawBackGround() {
@@ -199,24 +218,11 @@ public class InterfaceMiniGolf extends JFrame {
 		panel.add(lblNewLabel_1);
 	}
 
-	protected void DrawBola() {
-		panel.setLayout(null);
-		lblBola = new JLabel("");
-		lblBola.setBounds(277, 287, 20, 20);
-		lblBola.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lblBola.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBola.setIcon(new ImageIcon(InterfaceMiniGolf.class.getResource("/images/golfball.png")));
-		panel.add(lblBola);
-
-		panel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				Point p = MouseInfo.getPointerInfo().getLocation();
-				SwingUtilities.convertPointFromScreen(p, panel);
-				p.setLocation(p.getX() - lblBola.getWidth() / 2, p.getY() - lblBola.getHeight() / 2);
-				lblBola.setLocation(p);
-			}
-		});
+	public void exibirBola(Vetor2 posicao, boolean ehJogadorLocal) {
+		if(ehJogadorLocal)
+			lblBola1.setLocation((int)posicao.obterX(), (int)posicao.obterY());
+		else
+			lblBola2.setLocation((int)posicao.obterX(), (int)posicao.obterY());
 	}
 
 	protected void DrawMenuBar() {
@@ -336,41 +342,41 @@ public class InterfaceMiniGolf extends JFrame {
 	}
 	
 	public void desenharForca(float fracao) {
-	}
-	
-	public void selecionarForca() {
-	}
-	
-	public void selecionarDirecao(Vetor2 direcao) {
+		progressBar.setValue( (int)(fracao*100f));
 		
 	}
 	
-	public void conectar() {
+	public void selecionarForca() {
+		atorJogador.selecionarForca();
 	}
 	
-	public String obterNomeJogador(){
-		return "";
+	public void selecionarDirecao(Vetor2 direcao) {
+		atorJogador.selecionarDirecao(direcao);
 	}
+	
 	
 	public String obterEnderecoServidor() {
 		return "";
 	}
 	
 	public void notificar(String notificacao) {
+		lblStatus.setText(notificacao);
 	}
 	
 	public void iniciarPartida() {
-	}
-	
-	public void exibirEstado() {
+		atorJogador.iniciarPartida();
 	}
 	
 	public void exibirMensagem(String mensagem) {
+		lblStatus.setText(mensagem);
 	}
 	
 	public void exibirTacadas(int tacadas, boolean ehJogadorLocal) {
-	}
-	
-	public void exibirBola(Vetor2 posicao, boolean ehJogadorLocal) {
+		if(ehJogadorLocal) {
+			lblPontJog1.setText( "Voce: " + tacadas);
+		} else {
+			lblPontJog1.setText( "Oponente: " + tacadas);
+		}
+		
 	}
 }
