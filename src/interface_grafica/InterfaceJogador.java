@@ -6,8 +6,21 @@ import rede.*;
 public class InterfaceJogador {
 	
 	protected InterfaceNetgamesServer ngames;
+	protected InterfaceMiniGolf interfaceMiniGolf;
 	protected ElementoDominioProblema domProblema;
+	protected boolean aguardandoMouse;
 	protected float tempoDoMouse;
+	protected Partida partida;
+	protected boolean antigoEstadoTurno;
+	protected boolean novoEstadoTurno;
+	protected float inicioUltimaIteracao;
+	protected float fimUltimaIteracao;
+	protected Vetor2 velocidade;
+	protected float tempoDaForcaMaxima = 2000f;
+	protected float forcaDaTacada = 10f;
+	protected float fracao;
+	
+	
 
 	public InterfaceJogador() {
 		ngames = new InterfaceNetgamesServer();
@@ -42,26 +55,84 @@ public class InterfaceJogador {
 		String mensagem = "Faltam jogadores suficientes conectados";
 		boolean permitido = domProblema.permitidoIniciarPartida();
 		if (permitido) {
+			iniciarNovaPartida();
 			mensagem = ngames.iniciarPartida();
 		}
 		return mensagem;
 	}
 	
 	public void receberTacada(Tacada tacada) {
+		antigoEstadoTurno = partida.receberTacada(tacada);
+		movimentaBolinha();
+		avaliarEncerramentoDePartida();
 	}
 	
+	
 	public void processarForca() {
+		comecarAContar();
+		while(aguardandoMouse) {
+			interfaceMiniGolf.desenharForca(fracao);
+			contarTempo();
+		}
+		
 	}
 	
 	public void comecarAContar() {
+		aguardandoMouse = true;
+		tempoDoMouse = 0f;
+		inicioUltimaIteracao = System.currentTimeMillis();
 	}
 	
 	public void contarTempo() {
+		fimUltimaIteracao = System.currentTimeMillis();
+		tempoDoMouse = fimUltimaIteracao - inicioUltimaIteracao;
+		fracao = tempoDoMouse/tempoDaForcaMaxima;
+		if(fracao > 1f)
+			fracao = 1f;
 	}
 	
 	public void selecionarForca() {
+		if(aguardandoMouse) {
+			terminarDeContar();
+			velocidade = velocidade.multiplicarPorEscalar(fracao);
+		}
 	}
 	
 	public void terminarDeContar() {
+		aguardandoMouse = false;
+	}
+	
+	public void selecionarDirecao(Vetor2 direcao) {
+		boolean turno = partida.obterTurnoJogadorLocal();
+		if(turno) {
+			velocidade = direcao.obterVetorNormalizado();
+			velocidade = velocidade.multiplicarPorEscalar(forcaDaTacada);
+			processarForca();
+			Tacada tacada = new Tacada(velocidade);
+			ngames.enviarTacada(tacada);
+			partida.registrarTacada(direcao);
+			movimentaBolinha();
+			avaliarEncerramentoDePartida();
+		}
+	}
+	
+	public void movimentaBolinha() {
+		while(antigoEstadoTurno == novoEstadoTurno) {
+			float tempoIteracao = fimUltimaIteracao - inicioUltimaIteracao;
+			inicioUltimaIteracao = System.currentTimeMillis();
+			EstadoPartida estadoPartida = partida.iteraBolinha(tempoIteracao);
+			interfaceMiniGolf.exibirEstado(estadoPartida);
+			fimUltimaIteracao = System.currentTimeMillis();
+			novoEstadoTurno = estadoPartida.obterTurnoJogadorLocal();
+		}
+	}
+	
+	public void avaliarEncerramentoDePartida() {
+		EstadoPartida estadoPartida =  partida.avaliarEncerramentoDePartida();
+		interfaceMiniGolf.exibirEstado(estadoPartida);
+	}
+	
+	public void iniciarNovaPartida() {
+		partida = new Partida()
 	}
 }
