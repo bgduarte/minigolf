@@ -143,7 +143,7 @@ public class InterfaceJogador {
 				ngames.encerrarPartida();
 			}
 			
-			partida.iniciarPartida(true);
+			ngames.iniciarPartida();
 		}
 	}
 }
