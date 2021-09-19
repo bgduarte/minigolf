@@ -1,12 +1,12 @@
 package dominio_do_problema;
 
-public class Partida {
+public class Partida extends ElementoDominioProblema {
 	
 	protected Mapa mapa;
 	protected Jogador[] jogadores;
 	protected boolean turnoJogadorLocal;
 	
-	Partida(boolean jogadorLocalIniciou) {
+	public Partida() {
 		//TODO: ler mapa de um arquivo
 		// Inicializaçao do mapa
 		Parede[] paredes = new Parede[1];
@@ -19,13 +19,13 @@ public class Partida {
 		Buraco buraco = new Buraco(0f,posicaoBuraco , raioBuraco);
 		mapa = new Mapa(paredes, buraco, posicaoInicio);
 		
-		
-		//
-		Vetor2 posicaoInicial = mapa.obterPosicaoDeInicio();
-		
-		jogadores[0] = new Jogador(posicaoInicial, mapa);
-		jogadores[1] = new Jogador(posicaoInicial, mapa);
+	}
+	
+	public void iniciarPartida(boolean jogadorLocalIniciou) {
+		jogadores[0] = new Jogador(mapa.obterPosicaoDeInicio(), mapa);
+		jogadores[1] = new Jogador(mapa.obterPosicaoDeInicio(), mapa);
 		turnoJogadorLocal = jogadorLocalIniciou;
+		definirPartidaAndamento(partidaAndamento);
 	}
 	
 	public EstadoPartida iteraBolinha(float tempoIteracao) {
@@ -100,4 +100,15 @@ public class Partida {
 		jogadores[0] = new Jogador(posicaoInicial, mapa);
 		jogadores[1] = new Jogador(posicaoInicial, mapa);
 	}
+	
+	//TODO: atualizars diagramas
+	public boolean encerrarPartida() {
+		if(partidaAndamento) {
+			this.encerrarPartidaLocalmente();
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 }

@@ -42,7 +42,13 @@ public class InterfaceMiniGolf extends JFrame {
 	protected JLabel lblBola;
 	protected TileMapPane panel;
 	protected JLabel lblStatus;
-	private InterfaceJogador atorJogador;
+	protected InterfaceJogador atorJogador;
+	protected JLabel lblBuraco;
+	protected JLabel lblNumeroDeRodadas;
+	protected JLabel lblJogadorDaVez;
+	
+	JLabel lblPontJog1;
+	JLabel lblPontJog2;
 
 	/**
 	 * Launch the application.
@@ -76,11 +82,7 @@ public class InterfaceMiniGolf extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("Jogador da Vez");
-		lblNewLabel.setBounds(5, 11, 221, 31);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
-		contentPane.add(lblNewLabel);
+		DrawJogadorDaVez();
 
 		lblStatus = new JLabel("Status");
 		lblStatus.setBounds(0, 514, 779, 24);
@@ -90,47 +92,40 @@ public class InterfaceMiniGolf extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
-		panel = new TileMapPane("/images/grass.jpg");
-		panel.setForeground(new Color(0, 51, 0));
-		panel.setBorder(new LineBorder(new Color(0, 0, 0), 0));
-		panel.setBounds(0, 43, 779, 469);
-		panel.setBackground(new Color(0, 128, 0));
-		contentPane.add(panel);
+		DrawNumeroDeRodadas();
 
-		JLabel lblJogadorDaVez = new JLabel("Rodada N");
-		lblJogadorDaVez.setVerticalAlignment(SwingConstants.TOP);
-		lblJogadorDaVez.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblJogadorDaVez.setBounds(664, 11, 115, 31);
-		contentPane.add(lblJogadorDaVez);
-
-		JProgressBar progressBar = new JProgressBar();
-		progressBar.setBounds(206, 11, 369, 25);
-		contentPane.add(progressBar);
-		UIManager.put("ProgressBar.selectionBackground", Color.RED);
-
-		panel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				Point p = MouseInfo.getPointerInfo().getLocation();
-				progressBar.setValue((int) p.getX() % 100);
-			}
-		});
-
+		DrawBackGround();
+		
+		DrawProgressBar();
+		
+		DrawPontuacao();
+		
 		DrawBola();
 
 		DrawPontilhado();
 
-		DrawBuraco();
+		DrawMapElements();
 
 	}
-
-	protected void DrawBuraco() {
-		JLabel lblBuraco = new JLabel("");
-		lblBuraco.setBounds(158, 185, 30, 30);
-		lblBuraco.setIcon(new ImageIcon(InterfaceMiniGolf.class.getResource("/images/buraco.png")));
-		panel.add(lblBuraco);
-
-		JLabel lblPontJog1 = new JLabel("Jogador1: ");
+	
+	void DrawNumeroDeRodadas() {
+		lblNumeroDeRodadas = new JLabel("Rodada N");
+		lblNumeroDeRodadas.setVerticalAlignment(SwingConstants.TOP);
+		lblNumeroDeRodadas.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblNumeroDeRodadas.setBounds(664, 11, 115, 31);
+		contentPane.add(lblNumeroDeRodadas);
+	}
+	
+	void DrawJogadorDaVez() {
+		lblJogadorDaVez = new JLabel("Jogador da Vez");
+		lblJogadorDaVez.setBounds(5, 11, 221, 31);
+		lblJogadorDaVez.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblJogadorDaVez.setVerticalAlignment(SwingConstants.TOP);
+		contentPane.add(lblJogadorDaVez);
+	}
+	
+	void DrawPontuacao() {
+		lblPontJog1 = new JLabel("Jogador1: ");
 		lblPontJog1.setBounds(0, 26, 213, 20);
 		panel.add(lblPontJog1);
 		lblPontJog1.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -140,10 +135,41 @@ public class InterfaceMiniGolf extends JFrame {
 		lblpontuacao.setBounds(0, 0, 213, 30);
 		panel.add(lblpontuacao);
 
-		JLabel lblPontJog2 = new JLabel("Jogador2: ");
+		lblPontJog2 = new JLabel("Jogador2: ");
 		lblPontJog2.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblPontJog2.setBounds(0, 45, 213, 20);
 		panel.add(lblPontJog2);
+	}
+	
+	void DrawProgressBar() {
+		JProgressBar progressBar = new JProgressBar();
+		progressBar.setBounds(206, 11, 369, 25);
+		contentPane.add(progressBar);
+		UIManager.put("ProgressBar.selectionBackground", Color.RED);
+		
+		panel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Point p = MouseInfo.getPointerInfo().getLocation();
+				progressBar.setValue((int) p.getX() % 100);
+			}
+		});
+	}
+	
+	void DrawBackGround() {
+		panel = new TileMapPane("/images/grass.jpg");
+		panel.setForeground(new Color(0, 51, 0));
+		panel.setBorder(new LineBorder(new Color(0, 0, 0), 0));
+		panel.setBounds(0, 43, 779, 469);
+		panel.setBackground(new Color(0, 128, 0));
+		contentPane.add(panel);
+	}
+
+	protected void DrawMapElements() {
+		lblBuraco = new JLabel("");
+		lblBuraco.setBounds(158, 185, 30, 30);
+		lblBuraco.setIcon(new ImageIcon(InterfaceMiniGolf.class.getResource("/images/buraco.png")));
+		panel.add(lblBuraco);
 
 		TileMapPane panel_1 = new TileMapPane("/images/wood.png");
 		panel_1.setBounds(111, 96, 9, 243);

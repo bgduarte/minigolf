@@ -7,10 +7,9 @@ public class InterfaceJogador {
 	
 	protected InterfaceNetgamesServer ngames;
 	protected InterfaceMiniGolf interfaceMiniGolf;
-	protected ElementoDominioProblema domProblema;
+	protected Partida partida;
 	protected boolean aguardandoMouse;
 	protected float tempoDoMouse;
-	protected Partida partida;
 	protected boolean antigoEstadoTurno;
 	protected boolean novoEstadoTurno;
 	protected float inicioUltimaIteracao;
@@ -19,21 +18,19 @@ public class InterfaceJogador {
 	protected float tempoDaForcaMaxima = 2000f;
 	protected float forcaDaTacada = 10f;
 	protected float fracao;
-	
-	
 
 	public InterfaceJogador() {
 		ngames = new InterfaceNetgamesServer();
-		domProblema = new ElementoDominioProblema();
+		partida = new Partida();
 	}
 
 	public String conectar(String string, String string2) {
 		String mensagem = "ja conectado";
-		boolean permitido = domProblema.permitidoConectar();
+		boolean permitido = partida.permitidoConectar();
 		if (permitido) {
 			mensagem = ngames.conectar(string, string2);
 			if (mensagem.equals("Sucesso: conectado a Netgames Server")) {
-				domProblema.definirConectado(true);
+				partida.definirConectado(true);
 			}
 		}
 		return mensagem;
@@ -41,11 +38,11 @@ public class InterfaceJogador {
 	
 	public String desconectar() {
 		String mensagem = "Nao conectado para poder desconectar";
-		boolean permitido = domProblema.permitidoDesconectar();
+		boolean permitido = partida.permitidoDesconectar();
 		if (permitido) {
 			mensagem = ngames.desconectar();
 			if (mensagem.equals("Sucesso: desconectado de Netgames Server")) {
-				domProblema.definirConectado(false);
+				partida.definirConectado(false);
 			}
 		}
 		return mensagem;
@@ -53,9 +50,8 @@ public class InterfaceJogador {
 	
 	public String iniciarPartida() {
 		String mensagem = "Faltam jogadores suficientes conectados";
-		boolean permitido = domProblema.permitidoIniciarPartida();
+		boolean permitido = partida.permitidoIniciarPartida();
 		if (permitido) {
-			iniciarNovaPartida();
 			mensagem = ngames.iniciarPartida();
 		}
 		return mensagem;
@@ -132,7 +128,22 @@ public class InterfaceJogador {
 		interfaceMiniGolf.exibirEstado(estadoPartida);
 	}
 	
-	public void iniciarNovaPartida() {
-		partida = new Partida()
+	public void iniciarNovaPartida(int ordem) {
+		boolean conectado = ngames.informaConectado();
+		if(!conectado) {
+			interfaceMiniGolf.notificar("Não conectado");
+		} else {
+			boolean atualizarInterface = partida.encerrarPartida();
+			if(partida.informarPartidaAndamento())
+			{
+				partida.encerrarPartidaLocalmente();
+			}
+			
+			if(atualizarInterface) {
+				ngames.encerrarPartida();
+			}
+			
+			ngames.iniciarPartida();
+		}
 	}
 }

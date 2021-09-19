@@ -61,7 +61,7 @@ public class InterfaceNetgamesServer implements OuvidorProxy {
 
 	public String iniciarPartida() {
 		try {
-			proxy.iniciarPartida(new Integer(2)); // supondo 2 jogadores, o que pode ser alterado
+			proxy.iniciarPartida(1); // supondo 2 jogadores, o que pode ser alterado
 		} catch (NaoConectadoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -117,6 +117,7 @@ public class InterfaceNetgamesServer implements OuvidorProxy {
 	}
 	
 	public void definirConectado(boolean valor) {
+		conectado = valor;
 	}
 	
 	public void encerrarPartida() {

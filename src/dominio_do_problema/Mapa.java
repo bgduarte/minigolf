@@ -11,7 +11,9 @@ public class Mapa {
 		this.paredes = paredes;
 		this.buraco = buraco;
 		this.posicaoDeInicio = posicaoDeInicio;
-		this.terrenos[0] = new Grama(0.5f);
+		Grama grama = new Grama(0.5f);
+		terrenos = new Terreno[1];
+		terrenos[0] = grama;
 	}
 	
 	public Vetor2 obterPosicaoDeInicio() {
