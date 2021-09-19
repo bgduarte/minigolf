@@ -82,7 +82,7 @@ public class InterfaceMiniGolf extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setLayout(null);
 
-		DrawJogadorDaVez();
+		exibirJogadorDaVez(false);
 
 		lblStatus = new JLabel("Status");
 		lblStatus.setBounds(0, 514, 779, 24);
@@ -116,8 +116,14 @@ public class InterfaceMiniGolf extends JFrame {
 		contentPane.add(lblNumeroDeRodadas);
 	}
 	
-	void DrawJogadorDaVez() {
-		lblJogadorDaVez = new JLabel("Jogador da Vez");
+	void exibirJogadorDaVez(boolean ehJogadorLocal) {
+		String texto;
+		if(ehJogadorLocal) {
+			texto = "Sua Vez!";
+		} else {
+			texto = "Vez do oponente";
+		}
+		lblJogadorDaVez = new JLabel(texto);
 		lblJogadorDaVez.setBounds(5, 11, 221, 31);
 		lblJogadorDaVez.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblJogadorDaVez.setVerticalAlignment(SwingConstants.TOP);
@@ -360,9 +366,6 @@ public class InterfaceMiniGolf extends JFrame {
 	}
 	
 	public void exibirMensagem(String mensagem) {
-	}
-	
-	public void exibirJogadorDaVez(boolean ehJogadorLocal) {
 	}
 	
 	public void exibirTacadas(int tacadas, boolean ehJogadorLocal) {
